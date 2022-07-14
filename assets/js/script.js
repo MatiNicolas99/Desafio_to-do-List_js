@@ -20,7 +20,7 @@ const renderizadoTareas = () => {
                     <span>ID: </span>
                     <p>${tarea.id}</p>
                     <li class="todo-item">${tarea.nombre}</li>
-                    <button class="check-btn" onclick="check(${tarea.id})">
+                    <button id="${tarea.id}" class="check-btn" onclick="check(${tarea.id})">
                         <i class="fas fa-check" aria-hidden="true"></i>
                     </button>
                     <button class="trash-btn" onclick="borrar(${tarea.id})">
@@ -54,12 +54,15 @@ const borrar = (id) => {
 
 //Función que para chequear tareas finalizadas
 const check = (id) => {
+    const btn_check = document.getElementById(id);
     const indice = tareas.findIndex((e) => e.id === id)
     if (tareas[indice].completado === false) {
         tareas[indice].completado = true;
+        btn_check.style.background = "rgb(98, 173, 68)"
         contadorRealizadas+=1;
     }else {
         tareas[indice].completado = false;
+        btn_check.style.background = "rgba(68, 100, 173, 1)"
         contadorRealizadas-=1;
     }
     realizadas.innerHTML = `${contadorRealizadas}`;
